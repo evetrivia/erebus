@@ -1,0 +1,14 @@
+# Python
+venv/
+*.pyc
+*.egg-info/
+
+# Cloud 9
+.c9/
+
+# PyCharm
+.idea/
+
+# Thanatos
+*.sql.bz2
+*.sql

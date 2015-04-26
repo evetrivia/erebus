@@ -1,0 +1,6 @@
+
+# DB
+Flask-MySQL
+
+# Thanatos
+Thanatos==0.0.2
