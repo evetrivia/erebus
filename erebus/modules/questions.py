@@ -2,12 +2,16 @@
 
 from flask.ext.restful import Resource
 
+from erebus.extensions import mysql
+from thanatos.questions.universe import BorderingRegionsQuestion
+
 
 class Test(Resource):
     """ TESTING """
     
     def get(self):
-        return {}
+        brq = BorderingRegionsQuestion(mysql.connection)
+        return brq.ask()
     
 
 def register_apis(api):
