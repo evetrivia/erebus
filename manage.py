@@ -5,12 +5,23 @@ import os
 from flask.ext.script  import Manager, Shell, Server, Command
 
 from erebus.app import create_app
-from erebus.settings import C9Config
+from erebus.settings import C9Config, ProdConfig, DevConfig
 from erebus.extensions import mysql
 from thanatos.database.db_utils import download_tables, load_tables_from_files, update_sql_stored_procs
 
-app = create_app(C9Config)
-server = Server(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
+
+if os.environ.get('PRODUCTION') is not None:
+    app = create_app(ProdConfig)
+    server = Server()
+
+elif os.environ.get('C9_PROJECT') is not None:
+    app = create_app(C9Config)
+    server = Server(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)))
+
+else:
+    app = create_app(DevConfig)
+    server = Server()
+    
 manager = Manager(app)
 
 

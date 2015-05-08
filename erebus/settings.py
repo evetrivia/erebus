@@ -9,11 +9,19 @@ class Config(object):
     DEBUG = False
 
 
+class ProdConfig(Config):
+    """ Production configuration. """
+    
+    MYSQL_HOST = os.environ.get('MYSQL_HOST')
+    MYSQL_USER	= os.environ.get('MYSQL_USER')
+    MYSQL_PASSWORD	= os.environ.get('MYSQL_PASSWORD')
+    MYSQL_DB = os.environ.get('MYSQL_DB')
+
+
 class DevConfig(Config):
     """ Development configuration. """
     
     DEBUG = True
-    SECRET_KEY = 'ThisIsJustTheDevKeyAndPrmesFromSomethingElseYBA*Sga78siTD&*SA%D&A*^STD&A^ISDAS'
 
     MYSQL_HOST = '127.0.0.1'
     MYSQL_USER	= 'vagrant'
