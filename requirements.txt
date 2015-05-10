@@ -2,4 +2,4 @@ Flask-RESTful==0.3.2
 Flask-Script==2.0.5
 Flask==0.10.1
 Flask-MySQLdb
-git+https://github.com/Regner/thanatos.git
+Thanatos==0.1.0
