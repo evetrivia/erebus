@@ -1,9 +1,10 @@
-FROM ubuntu:precise
+FROM ubuntu:15.04
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get install -y python python-dev python-setuptools
-RUN easy_install pip
+RUN apt-get install -y git
+RUN apt-get install -y libmysqlclient-dev
+RUN apt-get install -y python-pip python-dev build-essential
+RUN pip install --upgrade pip
 
 ADD . /erebus
 WORKDIR /erebus
@@ -11,3 +12,5 @@ WORKDIR /erebus
 RUN pip install -r requirements.txt
 
 CMD python manage.py server
+
+EXPOSE 5000
