@@ -1,14 +1,13 @@
 # Python
 venv/
+env/
 *.pyc
 *.egg-info/
-
-# Cloud 9
-.c9/
+dist/
+build/
 
 # PyCharm
 .idea/
 
-# Thanatos
-*.sql.bz2
-*.sql
+# Vagrant
+.vagrant/
