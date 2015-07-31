@@ -1,6 +1,7 @@
 FROM ubuntu:15.04
 
 RUN apt-get update
+RUN apt-get upgrade
 RUN apt-get install -y git
 RUN apt-get install -y libmysqlclient-dev
 RUN apt-get install -y python-pip python-dev build-essential
@@ -10,7 +11,8 @@ ADD . /erebus
 WORKDIR /erebus
 
 RUN pip install -r requirements.txt
+RUN pip install -r requirements-prod.txt
 
-CMD python manage.py server
+CMD gunicorn -w 1 -b 127.0.0.1:8000 erebus:app
 
-EXPOSE 5000
+EXPOSE 8000
