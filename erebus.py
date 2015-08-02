@@ -19,24 +19,30 @@ mysql = MySQL(app)
 @app.route('/')
 def root():
     data = {
-        'random_question': url_for('random_question'),
+        'random_question': url_for('random_question', _external=True),
         'categories': question_utils.get_all_question_details(),
     }
 
     for category in data['categories']:
-        data['categories'][category]['random_category_question'] = url_for('category_question', category=category)
+        data['categories'][category]['random_category_question'] = url_for(
+            'category_question',
+            category=category,
+            _external=True
+        )
 
         for sub_category in data['categories'][category]['sub_categories']:
             data['categories'][category]['sub_categories'][sub_category]['random_category_question'] = url_for(
                 'sub_category_question',
                 category=category,
-                sub_category=sub_category
+                sub_category=sub_category,
+                _external=True
             )
 
             for question in data['categories'][category]['sub_categories'][sub_category]['questions']:
                 data['categories'][category]['sub_categories'][sub_category]['questions'][question]['href'] = url_for(
                     'single_question',
-                    question=question
+                    question=question,
+                    _external=True
                 )
 
     return jsonify(data)
